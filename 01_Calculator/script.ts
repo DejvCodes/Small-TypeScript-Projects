@@ -20,7 +20,7 @@ const showError = (message: string) => {
 }
 
 // Funkce pro provedení výpočtu
-const performCalculation = async () => {
+const performCalculation = async (): Promise<void> => {
     try {
         // Získání vstupních hodnot od uživatele
         const answer: Answer = await inquirer.prompt([
@@ -75,6 +75,7 @@ const performCalculation = async () => {
             case "/":
                 if (secondNumber === 0) {
                     showError("Nelze dělit nulou!")
+                    return performCalculation()
                 } else {
                     result = firstNumber / secondNumber
                 }
@@ -99,7 +100,7 @@ const performCalculation = async () => {
 
         // Pokud ano, provede se další výpočet
         if (again.again) {
-            performCalculation()
+            return performCalculation()
         } else {
             console.log("Kalkulačka byla úspěšně ukončena.")
         }

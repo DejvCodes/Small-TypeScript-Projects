@@ -59,6 +59,7 @@ const performCalculation = async () => {
             case "/":
                 if (secondNumber === 0) {
                     showError("Nelze dělit nulou!");
+                    return performCalculation();
                 }
                 else {
                     result = firstNumber / secondNumber;
@@ -81,7 +82,7 @@ const performCalculation = async () => {
         // console.log(again.again)
         // Pokud ano, provede se další výpočet
         if (again.again) {
-            performCalculation();
+            return performCalculation();
         }
         else {
             console.log("Kalkulačka byla úspěšně ukončena.");
