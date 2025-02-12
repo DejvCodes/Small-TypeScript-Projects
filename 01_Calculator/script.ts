@@ -25,18 +25,28 @@ const performCalculation = async () => {
         // Získání vstupních hodnot od uživatele
         const answer: Answer = await inquirer.prompt([
             {
-                type: "input",
+                type: "number",
                 name: "firstNumber",
                 message: "Zadejte prosím první číslo: ",
-                validate: (input) => !isNaN(Number(input)) ? true : "Zadejte platné číslo!",
-                filter: (input) => Number(input), // Převod vstupu na číslo
+                validate: (number) => {
+                    if (number === null || isNaN(Number(number))) {
+                        return "Zadejte platné číslo!"
+                    }
+                    return true
+                },
+                // filter: (number) => Number(number), // Převod vstupu na číslo
             },
             {
-                type: "input",
+                type: "number",
                 name: "secondNumber",
                 message: "Zadejte prosím druhé číslo: ",
-                validate: (input) => !isNaN(Number(input)) ? true : "Zadejte platné číslo!",
-                filter: (input) => Number(input), // Převod vstupu na číslo
+                validate: (number) => {
+                    if (number === null || isNaN(Number(number))) {
+                        return "Zadejte platné číslo!"
+                    }
+                    return true
+                },
+                // filter: (number) => Number(number), // Převod vstupu na číslo
             },
             {
                 type: "list",
