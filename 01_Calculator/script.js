@@ -1,41 +1,41 @@
 // Knihovna, která umožňuje se ptát uživatele na vstupy v příkazovém řádku
 import inquirer from "inquirer";
-// Funkce pro ukončení programu s chybovou zprávou
-const exitWithError = (message) => {
+// Funkce pro zobrazení chyby
+const showError = (message) => {
     console.log(message);
-    process.exit(1); // Ukončí program
+    // process.exit(1) // Ukončí program
 };
 // Funkce pro provedení výpočtu
 const performCalculation = async () => {
     try {
-        // Získání vstupů od uživatele
+        // Získání vstupních hodnot od uživatele
         const answer = await inquirer.prompt([
             {
-                type: "number",
+                type: "input",
                 name: "firstNumber",
                 message: "Zadejte prosím první číslo: ",
+                validate: (input) => !isNaN(Number(input)) ? true : "Zadejte platné číslo!",
+                filter: (input) => Number(input), // Převod vstupu na číslo
             },
             {
-                type: "number",
+                type: "input",
                 name: "secondNumber",
                 message: "Zadejte prosím druhé číslo: ",
+                validate: (input) => !isNaN(Number(input)) ? true : "Zadejte platné číslo!",
+                filter: (input) => Number(input), // Převod vstupu na číslo
             },
             {
                 type: "list",
                 name: "operator",
                 choices: ["*", "+", "-", "/"],
-                message: "Zvolnte operátor: ",
+                message: "Zvolte operátor: ",
             },
         ]);
         // console.log(answer)
         // Destructuring
         const { firstNumber, secondNumber, operator } = answer;
-        // Validace: Kontrola, zda jsou obě čísla platná
-        if (isNaN(firstNumber) || isNaN(secondNumber)) {
-            exitWithError("Zadejte platná čísla!");
-        }
         let result = 0;
-        // Výpočet na základě zvoleného operátoru
+        // Výpočet podle operátoru
         switch (operator) {
             case "+":
                 result = firstNumber + secondNumber;
@@ -48,18 +48,18 @@ const performCalculation = async () => {
                 break;
             case "/":
                 if (secondNumber === 0) {
-                    exitWithError("Nelze dělit nulou!");
+                    showError("Nelze dělit nulou!");
                 }
                 else {
                     result = firstNumber / secondNumber;
                 }
                 break;
             default:
-                exitWithError("Neplatný operátor!");
+                showError("Neplatný operátor!");
         }
-        // Zobrazení výsledku
+        // Výpis výsledku
         console.log(`Váš výsledek je: ${result}`);
-        // Dotaz, zda chce uživatel provést další výpočet
+        // Dotaz na opakování výpočtu
         const again = await inquirer.prompt([
             {
                 type: "confirm",
@@ -81,5 +81,5 @@ const performCalculation = async () => {
         console.error("Nastala chyba při výpočtu:", error);
     }
 };
-// Volání funkce
+// Spuštění kalkulačky
 performCalculation();
