@@ -67,10 +67,13 @@ const performCalculation = async () => {
             default: false,
         }
     ]);
-    // console.log(again)
+    // console.log(again.again)
     // Pokud ano, provede se další výpočet
-    if (again) {
+    if (again.again) {
         performCalculation();
+    }
+    else {
+        console.log("Kalkulačka byla úspěšně ukončena.");
     }
 };
 // Volání funkce
