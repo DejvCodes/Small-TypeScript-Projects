@@ -29,7 +29,7 @@ const performCalculation = async (): Promise<void> => {
                 name: "firstNumber",
                 message: "Zadejte první číslo: ",
                 validate: (input: string) => {
-                    const numberRegex = /^[+-]?\d+(\.\d+)?$/ // Povolit čísla, včetně desetin
+                    const numberRegex: RegExp = /^[+-]?\d+(\.\d+)?$/ // Povolit čísla, včetně desetin
                     if (!numberRegex.test(input.trim())) {
                         return "Zadejte platné číslo!"
                     }
@@ -42,7 +42,7 @@ const performCalculation = async (): Promise<void> => {
                 name: "secondNumber",
                 message: "Zadejte druhé číslo: ",
                 validate: (input: string) => {
-                    const numberRegex = /^[+-]?\d+(\.\d+)?$/ // Povolit čísla, včetně desetin
+                    const numberRegex: RegExp = /^[+-]?\d+(\.\d+)?$/ // Povolit čísla, včetně desetin
                     if (!numberRegex.test(input.trim())) {
                         return "Zadejte platné číslo!"
                     }
@@ -107,6 +107,7 @@ const performCalculation = async (): Promise<void> => {
         } else {
             console.log("Kalkulačka byla úspěšně ukončena.")
         }
+
     } catch (error) {
         console.error("Nastala chyba při výpočtu:", error)
     }
