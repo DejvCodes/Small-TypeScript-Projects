@@ -70,7 +70,8 @@ const atm = async (): Promise<void> => {
                 message: "Zadejte částku pro výběr: ",
                 validate: (input: string) => {
                     const amountAsNum: number = parseInt(input)
-                    if (isNaN(amountAsNum) || amountAsNum <= 0) {
+                    const numberRegex: RegExp = /^\d+$/
+                    if (!numberRegex.test(input) || amountAsNum <= 0) {
                         return "Zadejte platnou částku pro výběr!"
                     }
                     return true
@@ -84,7 +85,7 @@ const atm = async (): Promise<void> => {
         // Destructuring
         const { quickAmount, customAmount } = answers
 
-        // Určení správné částky
+        // Určení částky pro výběr
         const enteredAmount: number = quickAmount ?? customAmount ?? 0
 
         // Výchozí zůstatek
