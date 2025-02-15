@@ -31,12 +31,6 @@ const atm = async () => {
             },
             {
                 type: "list",
-                name: "accountType",
-                choices: ["Běžný účet", "Spořící účet"],
-                message: "Zadejte typ svého bankovního účtu: ",
-            },
-            {
-                type: "list",
                 name: "transactionType",
                 choices: ["Rychlý výběr", "Výběr"],
                 message: "Vyberte typ transakce",
@@ -73,7 +67,7 @@ const atm = async () => {
         // Destructuring
         const { quickAmount, customAmount } = answers;
         // Určení částky pro výběr
-        const enteredAmount = quickAmount ?? customAmount ?? 0;
+        const enteredAmount = quickAmount || customAmount || 0;
         // Výchozí zůstatek
         const balance = 10000;
         // Oveření zůstatku

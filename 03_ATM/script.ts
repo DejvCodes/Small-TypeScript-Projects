@@ -5,7 +5,6 @@ import chalk from "chalk"
 interface Answers {
     userID: string
     userPIN: number
-    accountType: string
     transactionType: string
     quickAmount: number
     customAmount: number
@@ -39,12 +38,6 @@ const atm = async (): Promise<void> => {
                 },
                 filter: (password: string) => Number(password),
                 mask: "*",
-            },
-            {
-                type: "list",
-                name: "accountType",
-                choices: ["Běžný účet", "Spořící účet"],
-                message: "Zadejte typ svého bankovního účtu: ",
             },
             {
                 type: "list",
@@ -86,7 +79,7 @@ const atm = async (): Promise<void> => {
         const { quickAmount, customAmount } = answers
 
         // Určení částky pro výběr
-        const enteredAmount: number = quickAmount ?? customAmount ?? 0
+        const enteredAmount: number = quickAmount || customAmount || 0
 
         // Výchozí zůstatek
         const balance: number = 10000
