@@ -4,7 +4,7 @@ import chalk from "chalk";
 const generateNumber = () => {
     return Math.floor(Math.random() * 10) + 1;
 };
-// Funkce pro hádání náhodného čísla.
+// Funkce pro hádání náhodného čísla
 const guessANumber = async () => {
     // Generování nového čísla při každém kole
     const numberGeneration = generateNumber();
@@ -16,12 +16,9 @@ const guessANumber = async () => {
                 name: "userGuess",
                 message: "Hádej číslo od 1 do 10!",
                 validate: (input) => {
-                    const num = parseInt(input);
-                    if (isNaN(num)) {
-                        return "Zadejte prosím platné číslo.";
-                    }
-                    if (num < 1 || num > 10) {
-                        return "Číslo musí být mezi 1 a 10.";
+                    const numberRegex = /^[1-9]$|^10$/;
+                    if (!numberRegex.test(input.trim())) {
+                        return "Zadejte prosím platné číslo od 1 do 10.";
                     }
                     return true;
                 },
