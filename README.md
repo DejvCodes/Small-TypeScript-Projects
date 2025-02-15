@@ -18,6 +18,15 @@
 • Chalk – Adds color to terminal messages. <br>
 • Node.js – JavaScript runtime for executing the application in the terminal. <br>
 
+## 03_ATM
+• Interactive command-line ATM simulation using TypeScript and Inquirer.js. <br>
+• Allows users to select between "Rychlý výběr" or "Výběr". <br>
+• Predefined quick amounts (1000, 2000, 3000, 5000 Kč) or custom input for custom amount. <br>
+• Checks if the user has enough balance (starting balance: 10 000 Kč). <br>
+• Inquirer.js – Handles interactive prompts in the command line. <br>
+• Chalk – Adds color to terminal messages. <br>
+• Node.js – JavaScript runtime for executing the application in the terminal. <br>
+
 ## 💻 Tech Stack
 [![My Skills](https://skillicons.dev/icons?i=javascript,typescript,nodejs)](https://skillicons.dev)
 
