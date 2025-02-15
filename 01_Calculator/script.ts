@@ -2,7 +2,7 @@
 import inquirer from "inquirer"
 
 // Interface pro odpovědi uživatele
-interface Answer {
+interface Answers {
     firstNumber: number
     secondNumber: number
     operator: string
@@ -23,30 +23,26 @@ const showError = (message: string) => {
 const performCalculation = async (): Promise<void> => {
     try {
         // Získání vstupních hodnot od uživatele
-        const answer: Answer = await inquirer.prompt([
+        const answers: Answers = await inquirer.prompt([
             {
-                type: "number",
+                type: "input", // input je lepší, protože number může vrátit NaN
                 name: "firstNumber",
-                message: "Zadejte prosím první číslo: ",
-                validate: (number) => {
-                    if (number === null || isNaN(Number(number))) {
-                        return "Zadejte platné číslo!"
-                    }
-                    return true
+                message: "Zadejte první číslo: ",
+                validate: (input: string) => {
+                    const num = parseFloat(input)
+                    return isNaN(num) ? "Zadejte platné číslo!" : true
                 },
-                // filter: (number) => Number(number), // Převod vstupu na číslo
+                filter: (input: string) => parseFloat(input), // Převod na číslo
             },
             {
-                type: "number",
+                type: "input",
                 name: "secondNumber",
-                message: "Zadejte prosím druhé číslo: ",
-                validate: (number) => {
-                    if (number === null || isNaN(Number(number))) {
-                        return "Zadejte platné číslo!"
-                    }
-                    return true
+                message: "Zadejte druhé číslo: ",
+                validate: (input: string) => {
+                    const num = parseFloat(input)
+                    return isNaN(num) ? "Zadejte platné číslo!" : true
                 },
-                // filter: (number) => Number(number), // Převod vstupu na číslo
+                filter: (input: string) => parseFloat(input), // Převod na číslo
             },
             {
                 type: "list",
@@ -55,11 +51,17 @@ const performCalculation = async (): Promise<void> => {
                 message: "Zvolte operátor: ",
             },
         ])
-        // console.log(answer)
+        // console.log(answers)
 
         // Destructuring
-        const { firstNumber, secondNumber, operator } = answer
+        const { firstNumber, secondNumber, operator } = answers
         let result: number = 0
+
+        // Validace dělení nulou
+        if (operator === "/" && secondNumber === 0) {
+            showError("Nelze dělit nulou! Zadejte jiné číslo.")
+            return performCalculation()
+        }
 
         // Výpočet podle operátoru
         switch (operator) {
@@ -73,19 +75,14 @@ const performCalculation = async (): Promise<void> => {
                 result = firstNumber * secondNumber
                 break
             case "/":
-                if (secondNumber === 0) {
-                    showError("Nelze dělit nulou!")
-                    return performCalculation()
-                } else {
-                    result = firstNumber / secondNumber
-                }
+                result = firstNumber / secondNumber
                 break
             default:
                 showError("Neplatný operátor!")
         }
 
         // Výpis výsledku
-        console.log(`Váš výsledek je: ${result}`)
+        console.log(`Výpočet: ${firstNumber} ${operator} ${secondNumber} = ${result}`)
 
         // Dotaz na opakování výpočtu
         const again: Again = await inquirer.prompt([
