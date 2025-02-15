@@ -1,7 +1,8 @@
 import inquirer from "inquirer";
+import chalk from "chalk";
 // Funkce pro generování náhodného čísla od 1 do 10
 const generateNumber = () => {
-    return Math.ceil(Math.random() * 10);
+    return Math.floor(Math.random() * 10) + 1;
 };
 // Funkce pro hádání náhodného čísla.
 const guessANumber = async () => {
@@ -11,29 +12,30 @@ const guessANumber = async () => {
         // Dotaz na uživatele pro hádání čísla
         const answer = await inquirer.prompt([
             {
-                type: "number",
+                type: "input",
                 name: "userGuess",
-                message: "Hádej od 1 do 10, jaké číslo bylo vygenerováno!",
-                validate: (number) => {
-                    if (number === null || isNaN(Number(number))) {
+                message: "Hádej číslo od 1 do 10!",
+                validate: (input) => {
+                    const num = parseInt(input);
+                    if (isNaN(num)) {
                         return "Zadejte prosím platné číslo.";
                     }
-                    if (Number(number) < 1 || Number(number) > 10) {
+                    if (num < 1 || num > 10) {
                         return "Číslo musí být mezi 1 a 10.";
                     }
                     return true;
                 },
-                filter: (number) => Number(number)
+                filter: (input) => parseInt(input)
             }
         ]);
         // Uložení odpovědi do proměnné
         const userGuess = answer.userGuess;
         // Validace, zda uživatel uhodl číslo
         if (userGuess === numberGeneration) {
-            console.log("Tvoje odpověď je správná!");
+            console.log(chalk.green("Tvoje odpověď je správná!"));
         }
         else {
-            console.log("Špatně, zkus to znovu.");
+            console.log(chalk.red("Špatně, zkus to znovu."));
         }
         console.log(`Tvé číslo: ${userGuess}. Vygenerované číslo: ${numberGeneration}`);
         // Dotaz, zda chce uživatel pokračovat
@@ -50,7 +52,7 @@ const guessANumber = async () => {
             return guessANumber();
         }
         else {
-            console.log("Konec hry, díky za účast!");
+            console.log("Konec hry, díky za účast!", chalk.green(":-)"));
         }
     }
     catch (error) {

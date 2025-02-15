@@ -1,4 +1,5 @@
 import inquirer from "inquirer"
+import chalk from "chalk"
 
 // Typ pro odpověď uživatele
 type answerType = {
@@ -12,41 +13,42 @@ type againType = {
 
 // Funkce pro generování náhodného čísla od 1 do 10
 const generateNumber = (): number => {
-    return Math.ceil(Math.random() * 10)
+    return Math.floor(Math.random() * 10) + 1
 }
 
 // Funkce pro hádání náhodného čísla.
 const guessANumber = async (): Promise<void> => {
     // Generování nového čísla při každém kole
-    const numberGeneration = generateNumber()
+    const numberGeneration: number = generateNumber()
     try {
         // Dotaz na uživatele pro hádání čísla
         const answer: answerType = await inquirer.prompt([
             {
-                type: "number",
+                type: "input",
                 name: "userGuess",
-                message: "Hádej od 1 do 10, jaké číslo bylo vygenerováno!",
-                validate: (number) => {
-                    if (number === null || isNaN(Number(number))) {
+                message: "Hádej číslo od 1 do 10!",
+                validate: (input: string) => {
+                    const num = parseInt(input)
+                    if (isNaN(num)) {
                         return "Zadejte prosím platné číslo."
                     }
-                    if (Number(number) < 1 || Number(number) > 10) {
+                    if (num < 1 || num > 10) {
                         return "Číslo musí být mezi 1 a 10."
                     }
                     return true
                 },
-                filter: (number) => Number(number)
+                filter: (input: string) => parseInt(input)
             }
         ])
 
         // Uložení odpovědi do proměnné
-        const userGuess = answer.userGuess
+        const userGuess: number = answer.userGuess
 
         // Validace, zda uživatel uhodl číslo
         if (userGuess === numberGeneration) {
-            console.log("Tvoje odpověď je správná!")
+            console.log(chalk.green("Tvoje odpověď je správná!"))
         } else {
-            console.log("Špatně, zkus to znovu.")
+            console.log(chalk.red("Špatně, zkus to znovu."))
         }
         console.log(`Tvé číslo: ${userGuess}. Vygenerované číslo: ${numberGeneration}`)
 
@@ -64,7 +66,7 @@ const guessANumber = async (): Promise<void> => {
         if (again.again) {
             return guessANumber()
         } else {
-            console.log("Konec hry, díky za účast!")
+            console.log("Konec hry, díky za účast!", chalk.green(":-)"))
         }
     } catch (error) {
         console.error("Nastala chyba při hře:", error)
