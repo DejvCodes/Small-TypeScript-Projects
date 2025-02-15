@@ -65,7 +65,7 @@ const guessANumber = async (): Promise<void> => {
         } else {
             console.log("Konec hry, díky za účast!", chalk.green(":-)"))
         }
-        
+
     } catch (error) {
         console.error("Nastala chyba při hře:", error)
     }
