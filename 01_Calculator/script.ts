@@ -1,5 +1,6 @@
 // Knihovna, která umožňuje se ptát uživatele na vstupy v příkazovém řádku
 import inquirer from "inquirer"
+// Knihovna, která umožňuje snadné přidávání barev a stylů do textu v konzoly
 import chalk from "chalk"
 
 // Interface pro odpovědi uživatele
@@ -26,7 +27,7 @@ const performCalculation = async (): Promise<void> => {
         // Získání vstupních hodnot od uživatele
         const answers: Answers = await inquirer.prompt([
             {
-                type: "input", // input je lepší, protože number může vrátit NaN
+                type: "input",
                 name: "firstNumber",
                 message: "Zadejte první číslo: ",
                 validate: (input: string) => {
