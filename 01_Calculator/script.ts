@@ -1,5 +1,6 @@
 // Knihovna, která umožňuje se ptát uživatele na vstupy v příkazovém řádku
 import inquirer from "inquirer"
+import chalk from "chalk"
 
 // Interface pro odpovědi uživatele
 interface Answers {
@@ -15,7 +16,7 @@ interface Again {
 
 // Funkce pro zobrazení chyby
 const showError = (message: string) => {
-    console.log(message)
+    console.log(chalk.red(message))
     // process.exit(1) // Ukončí program
 }
 
@@ -105,7 +106,7 @@ const performCalculation = async (): Promise<void> => {
         if (again.again) {
             return performCalculation()
         } else {
-            console.log("Kalkulačka byla úspěšně ukončena.")
+            console.log(chalk.green("Kalkulačka byla úspěšně ukončena."))
         }
 
     } catch (error) {

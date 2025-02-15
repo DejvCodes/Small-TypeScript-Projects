@@ -1,8 +1,9 @@
 // Knihovna, která umožňuje se ptát uživatele na vstupy v příkazovém řádku
 import inquirer from "inquirer";
+import chalk from "chalk";
 // Funkce pro zobrazení chyby
 const showError = (message) => {
-    console.log(message);
+    console.log(chalk.red(message));
     // process.exit(1) // Ukončí program
 };
 // Funkce pro provedení výpočtu
@@ -86,7 +87,7 @@ const performCalculation = async () => {
             return performCalculation();
         }
         else {
-            console.log("Kalkulačka byla úspěšně ukončena.");
+            console.log(chalk.green("Kalkulačka byla úspěšně ukončena."));
         }
     }
     catch (error) {
