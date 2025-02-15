@@ -15,8 +15,11 @@ const performCalculation = async () => {
                 name: "firstNumber",
                 message: "Zadejte první číslo: ",
                 validate: (input) => {
-                    const num = parseFloat(input);
-                    return isNaN(num) ? "Zadejte platné číslo!" : true;
+                    const numberRegex = /^[+-]?\d+(\.\d+)?$/; // Povolit čísla, včetně desetin
+                    if (!numberRegex.test(input.trim())) {
+                        return "Zadejte platné číslo!";
+                    }
+                    return true;
                 },
                 filter: (input) => parseFloat(input), // Převod na číslo
             },
@@ -25,8 +28,11 @@ const performCalculation = async () => {
                 name: "secondNumber",
                 message: "Zadejte druhé číslo: ",
                 validate: (input) => {
-                    const num = parseFloat(input);
-                    return isNaN(num) ? "Zadejte platné číslo!" : true;
+                    const numberRegex = /^[+-]?\d+(\.\d+)?$/; // Povolit čísla, včetně desetin
+                    if (!numberRegex.test(input.trim())) {
+                        return "Zadejte platné číslo!";
+                    }
+                    return true;
                 },
                 filter: (input) => parseFloat(input), // Převod na číslo
             },
