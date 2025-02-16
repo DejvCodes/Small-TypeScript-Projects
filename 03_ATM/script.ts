@@ -8,6 +8,20 @@ interface Answers {
     transactionType: string
     quickAmount: number
     customAmount: number
+    depositAmount: number
+}
+
+// Výchozí zůstatek
+let balance: number = 10000
+
+// Funkce pro formátování částky
+const formatPrice = (value: number, locale = 'cs-CZ', currency = 'CZK') => {
+    return Intl.NumberFormat(locale, {
+        style: 'currency',
+        currency: currency,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+    }).format(value);
 }
 
 // Funkce ATM
@@ -42,7 +56,7 @@ const atm = async (): Promise<void> => {
             {
                 type: "list",
                 name: "transactionType",
-                choices: ["Rychlý výběr", "Výběr"],
+                choices: ["Rychlý výběr", "Výběr", "Vklad"],
                 message: "Vyberte typ transakce",
             },
             {
@@ -67,29 +81,48 @@ const atm = async (): Promise<void> => {
                     if (!numberRegex.test(input) || amountAsNum <= 0) {
                         return "Zadejte platnou částku pro výběr!"
                     }
+                    if (amountAsNum > balance) {
+                        return "Nedostatek peněz na účtě."
+                    }
                     return true
                 },
                 when: (answers) => answers.transactionType === "Výběr",
+                filter: (input: string) => Number(input)
+            },
+            {
+                type: "input",
+                name: "depositAmount",
+                message: "Zadejte částku pro vklad: ",
+                validate: (input: string) => {
+                    const amountAsNum: number = parseInt(input)
+                    const numberRegex: RegExp = /^\d+$/
+                    if (!numberRegex.test(input) || amountAsNum <= 0) {
+                        return "Zadejte platnou částku pro vklad!"
+                    }
+                    return true
+                },
+                when: (answers) => answers.transactionType === "Vklad",
                 filter: (input: string) => Number(input)
             },
         ])
         // console.log(answers)
 
         // Destructuring
-        const { quickAmount, customAmount } = answers
-
-        // Určení částky pro výběr
-        const enteredAmount: number = quickAmount || customAmount || 0
-
-        // Výchozí zůstatek
-        const balance: number = 10000
+        const { quickAmount, customAmount, depositAmount, transactionType } = answers
 
         // Oveření zůstatku
-        if (enteredAmount > 0 && balance >= enteredAmount) {
-            const remaining: number = balance - enteredAmount
-            console.log(chalk.green(`Výběr byl úspěšný! Na účtě Vám zbývá: ${remaining} Kč.`))
+        if (transactionType === "Vklad") {
+            balance += depositAmount
+            console.log(chalk.green(`Vklad byl úspěšný! Nový zůstatek: ${formatPrice(balance)}.`))
         } else {
-            console.log(chalk.red("Nedostatek peněz na účtě."))
+            const withdrawalAmount = quickAmount || customAmount || 0;
+
+            if (withdrawalAmount > balance) {
+                console.log(chalk.red("Nedostatek peněz na účtě."))
+            } else {
+                balance -= withdrawalAmount
+                console.log(chalk.green(`Výběr byl úspěšný! Na účtě zbývá: ${formatPrice(balance)}.`))
+            }
         }
 
     } catch (error) {

@@ -1,5 +1,16 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
+// Výchozí zůstatek
+let balance = 10000;
+// Funkce pro formátování částky
+const formatPrice = (value, locale = 'cs-CZ', currency = 'CZK') => {
+    return Intl.NumberFormat(locale, {
+        style: 'currency',
+        currency: currency,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+    }).format(value);
+};
 // Funkce ATM
 const atm = async () => {
     try {
@@ -32,7 +43,7 @@ const atm = async () => {
             {
                 type: "list",
                 name: "transactionType",
-                choices: ["Rychlý výběr", "Výběr"],
+                choices: ["Rychlý výběr", "Výběr", "Vklad"],
                 message: "Vyberte typ transakce",
             },
             {
@@ -57,26 +68,47 @@ const atm = async () => {
                     if (!numberRegex.test(input) || amountAsNum <= 0) {
                         return "Zadejte platnou částku pro výběr!";
                     }
+                    if (amountAsNum > balance) {
+                        return "Nedostatek peněz na účtě.";
+                    }
                     return true;
                 },
                 when: (answers) => answers.transactionType === "Výběr",
                 filter: (input) => Number(input)
             },
+            {
+                type: "input",
+                name: "depositAmount",
+                message: "Zadejte částku pro vklad: ",
+                validate: (input) => {
+                    const amountAsNum = parseInt(input);
+                    const numberRegex = /^\d+$/;
+                    if (!numberRegex.test(input) || amountAsNum <= 0) {
+                        return "Zadejte platnou částku pro vklad!";
+                    }
+                    return true;
+                },
+                when: (answers) => answers.transactionType === "Vklad",
+                filter: (input) => Number(input)
+            },
         ]);
         // console.log(answers)
         // Destructuring
-        const { quickAmount, customAmount } = answers;
-        // Určení částky pro výběr
-        const enteredAmount = quickAmount || customAmount || 0;
-        // Výchozí zůstatek
-        const balance = 10000;
+        const { quickAmount, customAmount, depositAmount, transactionType } = answers;
         // Oveření zůstatku
-        if (enteredAmount > 0 && balance >= enteredAmount) {
-            const remaining = balance - enteredAmount;
-            console.log(chalk.green(`Výběr byl úspěšný! Na účtě Vám zbývá: ${remaining} Kč.`));
+        if (transactionType === "Vklad") {
+            balance += depositAmount;
+            console.log(chalk.green(`Vklad byl úspěšný! Nový zůstatek: ${formatPrice(balance)}.`));
         }
         else {
-            console.log(chalk.red("Nedostatek peněz na účtě."));
+            const withdrawalAmount = quickAmount || customAmount || 0;
+            if (withdrawalAmount > balance) {
+                console.log(chalk.red("Nedostatek peněz na účtě."));
+            }
+            else {
+                balance -= withdrawalAmount;
+                console.log(chalk.green(`Výběr byl úspěšný! Na účtě zbývá: ${formatPrice(balance)}.`));
+            }
         }
     }
     catch (error) {
