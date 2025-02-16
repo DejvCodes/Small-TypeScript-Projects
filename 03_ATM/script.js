@@ -69,7 +69,7 @@ const atm = async () => {
                         return "Zadejte platnou částku pro výběr!";
                     }
                     if (amountAsNum > balance) {
-                        return "Nedostatek peněz na účtě.";
+                        return "Nedostatek peněz na účtu.";
                     }
                     return true;
                 },
@@ -103,11 +103,11 @@ const atm = async () => {
         else {
             const withdrawalAmount = quickAmount || customAmount || 0;
             if (withdrawalAmount > balance) {
-                console.log(chalk.red("Nedostatek peněz na účtě."));
+                console.log(chalk.red("Nedostatek peněz na účtu."));
             }
             else {
                 balance -= withdrawalAmount;
-                console.log(chalk.green(`Výběr byl úspěšný! Na účtě zbývá: ${formatPrice(balance)}.`));
+                console.log(chalk.green(`Výběr byl úspěšný! Nový zůstatek: ${formatPrice(balance)}.`));
             }
         }
     }

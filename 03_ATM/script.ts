@@ -21,7 +21,7 @@ const formatPrice = (value: number, locale = 'cs-CZ', currency = 'CZK') => {
         currency: currency,
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
-    }).format(value);
+    }).format(value)
 }
 
 // Funkce ATM
@@ -82,7 +82,7 @@ const atm = async (): Promise<void> => {
                         return "Zadejte platnou částku pro výběr!"
                     }
                     if (amountAsNum > balance) {
-                        return "Nedostatek peněz na účtě."
+                        return "Nedostatek peněz na účtu."
                     }
                     return true
                 },
@@ -115,13 +115,13 @@ const atm = async (): Promise<void> => {
             balance += depositAmount
             console.log(chalk.green(`Vklad byl úspěšný! Nový zůstatek: ${formatPrice(balance)}.`))
         } else {
-            const withdrawalAmount = quickAmount || customAmount || 0;
+            const withdrawalAmount = quickAmount || customAmount || 0
 
             if (withdrawalAmount > balance) {
-                console.log(chalk.red("Nedostatek peněz na účtě."))
+                console.log(chalk.red("Nedostatek peněz na účtu."))
             } else {
                 balance -= withdrawalAmount
-                console.log(chalk.green(`Výběr byl úspěšný! Na účtě zbývá: ${formatPrice(balance)}.`))
+                console.log(chalk.green(`Výběr byl úspěšný! Nový zůstatek: ${formatPrice(balance)}.`))
             }
         }
 
