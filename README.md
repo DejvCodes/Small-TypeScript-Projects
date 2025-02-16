@@ -19,8 +19,9 @@
 ## 03_ATM
 • Interactive command-line ATM simulation using TypeScript and Inquirer.js. <br>
 • Allows users to select between "Rychlý výběr", "Výběr" or "Vklad". <br>
-• Predefined quick amounts (1000, 2000, 3000, 5000 Kč) or custom amount. <br>
+• Predefined quick withdrawal amounts (1000, 2000, 3000, 5000 Kč) or custom amount. <br>
 • Checks if the user has enough balance (starting balance: 10 000 Kč). <br>
+• Includes a function to format amounts in CZK. <br>
 
 ## 💻 Tech Stack
 [![My Skills](https://skillicons.dev/icons?i=javascript,typescript,nodejs)](https://skillicons.dev)
