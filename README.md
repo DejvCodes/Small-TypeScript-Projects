@@ -23,7 +23,7 @@
 • Checks if the user has enough balance (starting balance: 10 000 Kč). <br>
 • Includes a function to format amounts in CZK. <br> 
 
-## 03_WordCounter
+## 04_WordCounter
 
 ## 💻 Tech Stack
 [![My Skills](https://skillicons.dev/icons?i=javascript,typescript,nodejs)](https://skillicons.dev)
