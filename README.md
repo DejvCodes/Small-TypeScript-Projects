@@ -24,6 +24,11 @@
 • Includes a function to format amounts in CZK. <br> 
 
 ## 04_WordCounter
+• Interactive command-line WordCounter built with TypeScript and Inquirer.js. <br>
+• Prompts the user to enter a sentence. <br>
+• Splits the sentence into words and counts them. <br>
+• Displays the total word count in the terminal using Chalk for styling. <br>
+• Option to enter another sentence for counting.
 
 ## 💻 Tech Stack
 [![My Skills](https://skillicons.dev/icons?i=javascript,typescript,nodejs)](https://skillicons.dev)
