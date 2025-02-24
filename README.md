@@ -5,13 +5,13 @@
 • Node.js – JavaScript runtime for executing the application in the terminal. <br>
 
 ## 01_Calculator
-• Interactive command-line calculator built with TypeScript and Inquirer.js. <br>
+• Interactive command-line Calculator built with TypeScript and Inquirer.js. <br>
 • Supports basic arithmetic operations: +, -, *, /. <br>
 • Prompts the user to enter two numbers and an operator, then displays the result in the terminal. <br>
 • Option to perform additional calculations after each result. <br>
 
 ## 02_GuessingGame
-• Interactive command-line number guessing game built with TS and Inquirer.js. <br>
+• Interactive command-line number GuessingGame built with TS and Inquirer.js. <br>
 • Generates a random number between 1 and 10. <br>
 • Prompts the user to guess the number and provides feedback on correctness. <br>
 • Option to play again after each round. <br>
