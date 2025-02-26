@@ -14,7 +14,7 @@
 • Interactive command-line number GuessingGame built with TS and Inquirer.js. <br>
 • Generates a random number between 1 and 10. <br>
 • Prompts the user to guess the number and provides feedback on correctness. <br>
-• Option to play again after each round. <br>
+• Option to play again after each round. <br> 
 
 ## 03_ATM
 • Interactive command-line ATM simulation using TypeScript and Inquirer.js. <br>
