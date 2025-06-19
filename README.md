@@ -34,4 +34,4 @@
 [![My Skills](https://skillicons.dev/icons?i=javascript,typescript,nodejs)](https://skillicons.dev)
 
 ## 🔐 License 
-[MIT License](LICENSE) 
+[MIT License](LICENSE)
