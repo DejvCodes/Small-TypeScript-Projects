@@ -1,4 +1,4 @@
-## Small TypeScript Projects 
+## Small TypeScript Projects  
 
 • Inquirer.js – Handles interactive prompts in the command line. <br>
 • Chalk – Adds color to terminal messages. <br>
