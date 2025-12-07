@@ -30,8 +30,29 @@
 • Displays the total word count in the terminal using Chalk for styling. <br>
 • Option to enter another sentence for counting.
 
+## 🏃🏻 How to Run this App
+1. Clone the repository: <br>
+   • `git clone https://github.com/DejvCodes/TypeScript-Small-projects.git` <br>
+   • `cd TypeScript-Small-projects` <br>
+2. Navigate to the project you want to run: <br>
+   • `cd 01_Calculator` or `cd 02_GuessingGame` or `cd 03_ATM` or `cd 04_WordCounter` <br>
+3. Install dependencies: <br>
+   • `npm install` <br>
+4. Run the TypeScript file: <br>
+   • `node script.js` <br>
+
 ## 💻 Tech Stack
 [![My Skills](https://skillicons.dev/icons?i=javascript,typescript,nodejs)](https://skillicons.dev)
+
+## 📁 Project Structure
+```
+TypeScript-Small-projects/
+├── 01_Calculator/      # Calculator app with basic arithmetic operations
+├── 02_GuessingGame/    # Number guessing game (1-10)
+├── 03_ATM/             # ATM simulation with deposits and withdrawals
+├── 04_WordCounter/     # Word counter for text input
+└── README.md           # Project documentation
+```
 
 ## 🔐 License 
 [MIT License](LICENSE)
