@@ -23,7 +23,7 @@
 • Checks if the user has enough balance (starting balance: 10 000 Kč). <br>
 • Includes a function to format amounts in CZK. <br> 
 
-## 04_WordCounter
+## 04_WordCounter 
 • Interactive command-line WordCounter built with TypeScript and Inquirer.js. <br>
 • Prompts the user to enter a sentence. <br>
 • Splits the sentence into words and counts them. <br>
