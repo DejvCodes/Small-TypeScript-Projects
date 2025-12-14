@@ -41,7 +41,7 @@
 4. Run the TypeScript file: <br>
    • `node script.js` <br>
 
-## 💻 Tech Stack
+## 💻 Tech Stack 
 [![My Skills](https://skillicons.dev/icons?i=javascript,typescript,nodejs)](https://skillicons.dev)
 
 ## 📁 Project Structure
