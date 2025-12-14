@@ -44,7 +44,7 @@
 ## 💻 Tech Stack 
 [![My Skills](https://skillicons.dev/icons?i=javascript,typescript,nodejs)](https://skillicons.dev)
 
-## 📁 Project Structure
+## 📁 Project Structure 
 ```
 TypeScript-Small-projects/
 ├── 01_Calculator/      # Calculator app with basic arithmetic operations
